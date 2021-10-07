@@ -1,4 +1,4 @@
-# Project Title
+# Matrices
 
 At school I got bored of calculating matrices so I decided to create a script for it.
 
