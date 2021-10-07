@@ -2,18 +2,19 @@ import copy
 
 
 class Matrix:
-    def __init__(self, nrows: int, ncols: int, elements: list) -> None:
+    def __init__(self, nrows: int, ncols: int, elements: list = None) -> None:
         self.nrows = nrows
         self.ncols = ncols
         self.elements = elements
         self.index = 0
         self.matrix = []
-        for _ in range(self.nrows):
-            self.row = []
-            for _ in range(self.ncols):
-                self.row.append(elements[self.index])
-                self.index += 1
-            self.matrix.append(self.row)
+        if elements is not None:
+            for _ in range(self.nrows):
+                self.row = []
+                for _ in range(self.ncols):
+                    self.row.append(elements[self.index])
+                    self.index += 1
+                self.matrix.append(self.row)
 
     def __str__(self) -> str:
         string_form = ""
@@ -57,6 +58,24 @@ class Matrix:
                 newElement = returnMatrix.matrix[i][j] - other.matrix[i][j]
                 returnMatrix.matrix[i][j] = newElement
                 returnMatrix.elements.append(newElement)
+
+        return returnMatrix
+
+    def __mul__(self, other: "Matrix" | int) -> "Matrix":
+        # TODO: Multiplying is hard :(
+        if self.nrows != other.nrows or self.ncols != other.ncols:
+            raise ValueError(
+                "The number of columns of the 1st Matrix must equal the number of rows of the 2nd Matrix."
+            )
+
+        returnMatrix = Matrix(
+            self.nrows, other.ncols, [x for x in (self.nrows * other.ncols)]
+        )
+        returnMatrix.elements = []
+        for i in range(self.nrows):
+            otherColumn = []
+            newRow = returnMatrix[i] * otherColumn
+            returnMatrix[i] = newRow
 
         return returnMatrix
 
