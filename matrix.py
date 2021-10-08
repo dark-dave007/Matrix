@@ -12,7 +12,7 @@ class Matrix:
             elements (list, optional): A list containing the elements of the matrix. Defaults to None.
 
         Example:
-        >>> a = a = Matrix(3, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+        >>> a = Matrix(3, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
         >>> print(a)
         1 2 3 4
         5 6 7 8
