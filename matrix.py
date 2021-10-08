@@ -1,8 +1,23 @@
 import copy
+from typing import Union
 
 
 class Matrix:
     def __init__(self, nrows: int, ncols: int, elements: list = None) -> None:
+        """Creates a Matrix object.
+
+        Args:
+            nrows (int): The number of rows in the Matrix.
+            ncols (int): The number of columns in the Matrix.
+            elements (list, optional): A list containing the elements of the matrix. Defaults to None.
+
+        Example:
+        >>> a = a = Matrix(3, 4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+        >>> print(a)
+        1 2 3 4
+        5 6 7 8
+        9 10 11 12
+        """
         self.nrows = nrows
         self.ncols = ncols
         self.elements = elements
@@ -38,12 +53,7 @@ class Matrix:
             raise ValueError("Matrices should be the same size")
 
         returnMatrix = Matrix(self.nrows, self.ncols, self.elements)
-        returnMatrix.elements = []
-        for i in range(self.nrows):
-            for j in range(self.ncols):
-                newElement = returnMatrix.matrix[i][j] + other.matrix[i][j]
-                returnMatrix.matrix[i][j] = newElement
-                returnMatrix.elements.append(newElement)
+        returnMatrix.add(other)
 
         return returnMatrix
 
@@ -52,30 +62,15 @@ class Matrix:
             raise ValueError("Matrices should be the same size")
 
         returnMatrix = Matrix(self.nrows, self.ncols, self.elements)
-        returnMatrix.elements = []
-        for i in range(self.nrows):
-            for j in range(self.ncols):
-                newElement = returnMatrix.matrix[i][j] - other.matrix[i][j]
-                returnMatrix.matrix[i][j] = newElement
-                returnMatrix.elements.append(newElement)
+        returnMatrix.subtract(other)
 
         return returnMatrix
 
-    def __mul__(self, other: "Matrix" | int) -> "Matrix":
-        # TODO: Multiplying is hard :(
-        if self.nrows != other.nrows or self.ncols != other.ncols:
-            raise ValueError(
-                "The number of columns of the 1st Matrix must equal the number of rows of the 2nd Matrix."
-            )
-
-        returnMatrix = Matrix(
-            self.nrows, other.ncols, [x for x in (self.nrows * other.ncols)]
-        )
-        returnMatrix.elements = []
-        for i in range(self.nrows):
-            otherColumn = []
-            newRow = returnMatrix[i] * otherColumn
-            returnMatrix[i] = newRow
+    def __mul__(self, other: "Matrix") -> "Matrix":
+        print(self)
+        returnMatrix = Matrix(self.nrows, self.ncols)
+        returnMatrix.matrix = self.matrix
+        returnMatrix.multiply(other)
 
         return returnMatrix
 
@@ -136,16 +131,42 @@ class Matrix:
                 self.matrix[i][j] = newElement
                 self.elements.append(newElement)
 
-    def multiply(self):
-        """Multiply another Matrix with this Matrix.
+    def multiply(self, other: Union["Matrix", int]) -> None:
+        """Multiply a Matrix or an integer with this Matrix.
 
         Args:
-            other (Matrix): The Matrix to multiply by.
+            other (Matrix | int): The Matrix or integer to multiply by.
         """
         # TODO: multiply with an integer or another matrix
-        pass
+        if type(other) == int:
+            self.elements = []
+            for i in range(self.nrows):
+                for j in range(self.ncols):
+                    newElement = self.matrix[i][j] * other
+                    self.matrix[i][j] = newElement
+                    self.elements.append(newElement)
+            return
 
-    def beautify(self):
+        if self.ncols != other.nrows:
+            raise ValueError(
+                "The number of columns of the 1st Matrix must equal the number of rows of the 2nd Matrix."
+            )
+
+        self.elements = []
+        self.backup = copy.deepcopy(self.matrix)
+        self.matrix = []
+        for i in range(self.nrows):
+            newRow = []
+            for j in range(other.ncols):
+                dotProduct = 0
+                for k in range(other.nrows):
+                    dotProduct += self.backup[i][k] * other.matrix[k][j]
+                newRow.append(dotProduct)
+                self.elements.append(dotProduct)
+            self.matrix.append(newRow)
+        self.ncols = other.ncols
+
+    def beautify(self) -> str:
         # TODO: Make ascii art of matrix when i feel like it
         pass
 
@@ -160,14 +181,29 @@ b = Matrix(4, 3, [2, 34, 53, 13, 7, 4, 41, 13, 98, 5, 8, 19])
 print("B")
 print(b)
 
-c = a + b
-print("C = A  + B")
-print(c)
+a.add(b)
+print("A = A  + B")
+print(a)
 
 d = b - a
 print("D = B - A")
 print(d)
 
-a.subtract(b)
-print("A = A - B")
+c = a - b
+print("C = A - B")
+print(c)
+c.transpose()
+
+a -= b
+a.multiply(3)
 print(a)
+
+d = a * c
+print(d)
+
+print(a)
+print(c)
+a.multiply(c)
+print(a)
+print(f"a: {a.nrows}x{a.ncols}")
+print(a.elements)
