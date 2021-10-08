@@ -13,7 +13,7 @@ Requirements are Python3.9
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md)
+This project is licensed under the [MIT License](license.md)
 
 ## Acknowledgments
 
