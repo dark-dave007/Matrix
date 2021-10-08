@@ -67,7 +67,6 @@ class Matrix:
         return returnMatrix
 
     def __mul__(self, other: "Matrix") -> "Matrix":
-        print(self)
         returnMatrix = Matrix(self.nrows, self.ncols)
         returnMatrix.matrix = self.matrix
         returnMatrix.multiply(other)
@@ -137,7 +136,6 @@ class Matrix:
         Args:
             other (Matrix | int): The Matrix or integer to multiply by.
         """
-        # TODO: multiply with an integer or another matrix
         if type(other) == int:
             self.elements = []
             for i in range(self.nrows):
