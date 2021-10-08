@@ -4,7 +4,7 @@ At school I got bored of calculating matrices so I decided to create a script fo
 
 ### Prerequisites
 
-Requirements are Python3.9
+Requirements are Python3+
 
 ## Author
 
