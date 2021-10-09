@@ -4,12 +4,11 @@ At school I got bored of calculating matrices so I decided to create a script fo
 
 ### Prerequisites
 
-Requirements are Python3.9
+Requirements are Python3+
 
-## Authors
+## Author
 
-  - [**David Eitan Lesman**](https://github.com/dark-dave007) - 
-    [Cheski Friedman](https://github.com/JetKnightAlpha)
+  - [**David Eitan Lesman**](https://github.com/dark-dave007)
 
 ## License
 
