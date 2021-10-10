@@ -187,7 +187,3 @@ I would like to add more functionality to this script, starting by being able to
 ## License
 
 This project is licensed under the [MIT License](license.md)
-
-## Acknowledgments
-
-- Thanks school for making work so repetitive that I decided to write this package for it.
