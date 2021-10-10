@@ -232,13 +232,12 @@ class Matrix:
                 "Matrix needs to be a square Matrix (Matrix with equal amount of rows and columns)."
             )
 
+        originalMatrix = Matrix(self.nrows, self.ncols, self.elements)
         show = False
         if show_steps:
             show = True
         for x in range(1, powerOf):
-            self.multiply(
-                Matrix(self.nrows, self.ncols, self.elements), show_steps=show
-            )
+            self.multiply(originalMatrix, show_steps=show)
             if show_steps and x < powerOf - 1:
                 print(
                     """
