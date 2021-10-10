@@ -152,11 +152,11 @@ Raise a Matrix to any power using `.power()`. This also supports showing steps.
 ```python
 >>> from matrix import Matrix
 >>> a = Matrix(nrows=3, ncols=3, elements=[1, 2, 3, 4, 5, 6, 7, 8, 9])
->>> a.power(2, show_steps=False) # show_steps is optional
+>>> a.power(3, show_steps=False) # show_steps is optional
 >>> print(a)
-30 36 42
-66 81 96
-102 126 150
+468 576 684
+1062 1305 1548
+1656 2034 2412
 ```
 
 ### **Get a nicer Matrix**
