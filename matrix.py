@@ -17,6 +17,8 @@ class Matrix:
         1 2 3 4
         5 6 7 8
         9 10 11 12
+
+        Documentation: https://www.github.com/dark-dave007/Matrix/readme.md
         """
         if len(elements) != nrows * ncols:
             raise ValueError(
@@ -117,7 +119,7 @@ class Matrix:
             other (Matrix): The Matrix to add.
         """
         if self.nrows != other.nrows or self.ncols != other.ncols:
-            raise ValueError("Matrices should be the same size")
+            raise ValueError("Matrices should be the same size.")
 
         self.elements = []
         for i in range(self.nrows):
@@ -218,7 +220,7 @@ class Matrix:
                     print(50 * "-")
                 self.index += 1
 
-    def power(self, powerOf: int, shows_step: bool = False) -> None:
+    def power(self, powerOf: int, show_steps: bool = False) -> None:
         """Raise the Matrix to an exponent.
 
         Args:
@@ -231,12 +233,27 @@ class Matrix:
             )
 
         show = False
-        if shows_step:
+        if show_steps:
             show = True
-        for _ in range(powerOf):
+        for x in range(1, powerOf):
             self.multiply(
                 Matrix(self.nrows, self.ncols, self.elements), show_steps=show
             )
+            if show_steps and x < powerOf - 1:
+                print(
+                    """
+  ;.;;;
+  ;;;;.
+  ;;;;;
+  ;;;;;
+  ;;;;;
+  ;;;;;
+  ;;;;;
+..;;;;;..
+ ':::::'
+   ':'
+                """
+                )
 
     def beautify(self) -> str:
         """Create a better version of the Matrix.
