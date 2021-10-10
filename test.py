@@ -17,8 +17,8 @@ a.multiply(3, 3, 3, 3, show_steps=True)
 d = Matrix(3, 3, [12, 11, 10, 130, 10, 9, 3, 87, 12])
 e = Matrix(3, 3, [12, 11, 10, 130, 10, 9, 3, 87, 12])
 
-d.power(2)
-d.beautify()
+d.power(2, shows_step=True)
+print(d.beautify())
 
 f = d * e
 f.beautify()

@@ -85,6 +85,7 @@ class Matrix:
         return returnMatrix
 
     def transpose(self) -> None:
+        """Transpose the matrix. (columns become the rows and vice versa)."""
         self.backup = copy.deepcopy(self.matrix)
         self.matrix = []
         self.elements = []
@@ -148,6 +149,7 @@ class Matrix:
             other (Matrix | int): The Matrix or integer to multiply by.
             show_steps (bool, optional): It will print out the steps of the multiplication. Defaults to False.
         """
+        # TODO: Fix show_steps to make it more clear what is going on
         self.index = 1
         for otherElement in other:
             oldMatrix = Matrix(self.nrows, self.ncols, self.elements)
@@ -161,7 +163,12 @@ class Matrix:
                         self.elements.append(newElement)
 
                 if show_steps:
-                    if self.index == 1:
+                    if len(other) == 1:
+                        print(oldMatrix)
+                        print(otherElement)
+                        print(50 * "-")
+                        print(self)
+                    elif self.index == 1:
                         print(oldMatrix)
                         print(otherElement)
                         print(50 * "-")
@@ -211,16 +218,32 @@ class Matrix:
                     print(50 * "-")
                 self.index += 1
 
-    def power(self, powerOf: int) -> None:
+    def power(self, powerOf: int, shows_step: bool = False) -> None:
+        """Raise the Matrix to an exponent.
+
+        Args:
+            powerOf (int): The exponent to which to raise the Matrix.
+            show_steps (bool, optional): It will print out the steps of the multiplication. Defaults to False.
+        """
         if self.nrows != self.ncols:
             raise ValueError(
                 "Matrix needs to be a square Matrix (Matrix with equal amount of rows and columns)."
             )
 
+        show = False
+        if shows_step:
+            show = True
         for _ in range(powerOf):
-            self.multiply(Matrix(self.nrows, self.ncols, self.elements))
+            self.multiply(
+                Matrix(self.nrows, self.ncols, self.elements), show_steps=show
+            )
 
     def beautify(self) -> str:
+        """Create a better version of the Matrix.
+
+        Returns:
+            str: The Matrix, but nicer :D.
+        """
         longestNum = 0
         for i in range(self.nrows):
             for j in range(self.ncols):
@@ -231,20 +254,20 @@ class Matrix:
         longestLine = 0
         lines = []
         for i in range(self.nrows):
-            line = "|" + endspace
+            line = "│" + endspace
             for j in range(self.ncols):
                 space = " " * (longestNum - len(str(self.matrix[i][j])))
                 line += space + str(self.matrix[i][j]) + endspace
-            line += "|"
+            line += "│"
             lines.append(line)
 
             if len(line) > longestLine:
                 longestLine = len(line)
 
         longestLine -= 6
-        beautified = "---" + longestLine * " " + "---\n"
+        beautified = "┌──" + longestLine * " " + "──┐\n"
         for line in lines:
             beautified += line + "\n"
-        beautified += "---" + longestLine * " " + "---\n"
+        beautified += "└──" + longestLine * " " + "──┘\n"
 
-        print(beautified)
+        return beautified
