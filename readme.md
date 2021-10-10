@@ -8,7 +8,6 @@ At school I got bored of calculating matrices so I decided to create a script fo
   - [What's to come](#whats-to-come)
   - [Author](#author)
   - [License](#license)
-  - [Acknowledgments](#acknowledgments)
 
 ## Prerequisites
 
