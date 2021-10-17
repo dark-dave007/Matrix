@@ -80,7 +80,7 @@ class Matrix:
 
         return returnMatrix
 
-    def __mul__(self, other: "Matrix") -> "Matrix":
+    def __mul__(self, other: Union["Matrix", int, float]) -> "Matrix":
         returnMatrix = Matrix(self.nrows, self.ncols, self.elements)
         returnMatrix.multiply(other)
 
@@ -144,7 +144,9 @@ class Matrix:
                 self.matrix[i][j] = newElement
                 self.elements.append(newElement)
 
-    def multiply(self, *other: Union["Matrix", int], show_steps: bool = False) -> None:
+    def multiply(
+        self, *other: Union["Matrix", int, float], show_steps: bool = False
+    ) -> None:
         """Multiply a Matrix or an integer with this Matrix.
 
         Args:
@@ -157,7 +159,7 @@ class Matrix:
             oldMatrix = Matrix(self.nrows, self.ncols, self.elements)
             self.elements = []
 
-            if type(otherElement) == int:
+            if type(otherElement) == int or type(otherElement) == float:
                 for i in range(self.nrows):
                     for j in range(self.ncols):
                         newElement = self.matrix[i][j] * otherElement
@@ -241,14 +243,14 @@ class Matrix:
             if show_steps and x < powerOf - 1:
                 print(
                     """
-  ;.;;;
-  ;;;;.
-  ;;;;;
-  ;;;;;
-  ;;;;;
-  ;;;;;
-  ;;;;;
-..;;;;;..
+  :::::
+  :::::
+  :::::
+  :::::
+  :::::
+  :::::
+  :::::
+..:::::..
  ':::::'
    ':'
                 """
