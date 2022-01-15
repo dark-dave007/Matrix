@@ -175,14 +175,6 @@ Get a nicer printable version of the Matrix using `.beautify()`.
 └──   ──┘
 ```
 
-## What's to come
-
-I would like to add more functionality to this script, starting by being able to do division.
-
-## Author
-
-- [**David Eitan Lesman**](https://github.com/dark-dave007)
-
 ## License
 
 This project is licensed under the [MIT License](license.md)
