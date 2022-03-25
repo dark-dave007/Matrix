@@ -174,7 +174,3 @@ Get a nicer printable version of the Matrix using `.beautify()`.
 │ 7 8 9 │
 └──   ──┘
 ```
-
-## License
-
-This project is licensed under the [MIT License](license.md)
